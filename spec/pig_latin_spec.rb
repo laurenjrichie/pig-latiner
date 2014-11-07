@@ -6,12 +6,12 @@ describe PigLatin do
     expect(translation).to be ==  "appleay"
   end
 
-  xit "translates a word beginning with a consonant" do
+  it "translates a word beginning with a consonant" do
     translation = PigLatin.new("banana").translate
     expect(translation).to be ==  "ananabay"
   end
 
-  xit "translates a word beginning with two consonants" do
+  it "translates a word beginning with two consonants" do
     translation = PigLatin.new("cherry").translate
     expect(translation).to be ==  "errychay"
   end
