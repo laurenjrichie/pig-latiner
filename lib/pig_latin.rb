@@ -1,25 +1,39 @@
 class PigLatin
 
-  def initialize(word)
-    @word = word
+  def initialize(input)
+    @input = input
   end
 
-  def word
-    @word
+  def input
+    @input
   end
 
   def translate
-    if /[aeiou]/.match(word[0])
-      "#{word}ay"
-   elsif word[1] !~ /[aeiou]/
-      chop_second_char = word[2..-1]
-      second_chars = word[0..1]
-      "#{chop_second_char}#{second_chars}ay"
-    else
-      chop_first_char = word[1..-1]
-      first_char = word[0]
-      "#{chop_first_char}#{first_char}ay"
+    output = []
+    input.split(" ").each do |word|
+      if (word[0]) =~ /[aeiou]/   # all that start with vowel
+        output << "#{word}ay"
+      elsif word[0..2] !~ /[aeiou]/ || word[1..2] == "qu" # first three are consonants or _qu
+        output << "#{word[3..-1]}#{word[0..2]}ay"
+      elsif word[1] !~ /[aeiou]/ || word[0..1] == "qu" # first two are consonants or qu
+        output << "#{word[2..-1]}#{word[0..1]}ay"
+      else                          # everything else
+        output << "#{word[1..-1]}#{word[0]}ay"
+      end
     end
+
+    fixed_output = []
+    output.each do |word|
+      if word != word.downcase
+        fixed_output << word.capitalize
+      else
+        fixed_output << word
+      end
+    end
+
+
+    fixed_output.join(" ")
+
   end
 
 end

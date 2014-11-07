@@ -16,42 +16,42 @@ describe PigLatin do
     expect(translation).to be ==  "errychay"
   end
 
-  xit "translates two words" do
+  it "translates two words" do
     translation = PigLatin.new("eat pie").translate
     expect(translation).to be ==  "eatay iepay"
   end
 
-  xit "translates a word beginning with three consonants" do
+  it "translates a word beginning with three consonants" do
     translation = PigLatin.new("three").translate
     expect(translation).to be == "eethray"
   end
 
-  xit "counts 'sch' as a single phoneme" do
+  it "counts 'sch' as a single phoneme" do
     translation = PigLatin.new("school").translate
     expect(translation).to be ==  "oolschay"
   end
 
-  xit "counts 'qu' as a single phoneme" do
+  it "counts 'qu' as a single phoneme" do
     translation = PigLatin.new("quiet").translate
     expect(translation).to be ==  "ietquay"
   end
 
-  xit "counts 'qu' as a consonant even when xit's preceded by a consonant" do
+  it "counts 'qu' as a consonant even when xit's preceded by a consonant" do
     translation = PigLatin.new("square").translate
     expect(translation).to be ==  "aresquay"
   end
 
-  xit "translates many words" do
+  it "translates many words" do
     translation = PigLatin.new("the quick brown fox").translate
     expect(translation).to be == "ethay ickquay ownbray oxfay"
   end
 
-  xit "handles capitalization of a word" do
+  it "handles capitalization of a word" do
     translation = PigLatin.new("Square").translate
     expect(translation).to be == "Aresquay"
   end
 
-  xit "handles capitalization within a sentence" do
+  it "handles capitalization within a sentence" do
     translation = PigLatin.new("the quick brown Fox").translate
     expect(translation).to be == "ethay ickquay ownbray Oxfay"
   end
