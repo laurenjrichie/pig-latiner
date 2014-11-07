@@ -31,7 +31,6 @@ class PigLatin
       end
     end
 
-
     fixed_output.join(" ")
 
   end
