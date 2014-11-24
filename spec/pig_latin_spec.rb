@@ -56,7 +56,7 @@ describe PigLatin do
     expect(translation).to be == "ethay ickquay ownbray Oxfay"
   end
 
-  xit "leaves punctuation alone" do
+  it "leaves punctuation alone" do
     translation = PigLatin.new("The quick, brown fox.").translate
     expect(translation).to be == "Ethay ickquay, ownbray oxfay."
   end

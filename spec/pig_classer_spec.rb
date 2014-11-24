@@ -56,7 +56,7 @@ describe PigClasser do
     expect(translation).to be == "ethay ickquay ownbray Oxfay"
   end
 
-  xit "leaves punctuation alone" do
+  it "leaves punctuation alone" do
     translation = PigClasser.translate("The quick, brown fox.")
     expect(translation).to be == "Ethay ickquay, ownbray oxfay."
   end

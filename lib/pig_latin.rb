@@ -1,38 +1,68 @@
 class PigLatin
+  attr_reader :input
 
   def initialize(input)
     @input = input
   end
 
-  def input
-    @input
-  end
-
   def translate
     output = []
     input.split(" ").each do |word|
-      if (word[0]) =~ /[aeiou]/   # all that start with vowel
-        output << "#{word}ay"
-      elsif word[0..2] !~ /[aeiou]/ || word[1..2] == "qu" # first three are consonants or _qu
-        output << "#{word[3..-1]}#{word[0..2]}ay"
-      elsif word[1] !~ /[aeiou]/ || word[0..1] == "qu" # first two are consonants or qu
-        output << "#{word[2..-1]}#{word[0..1]}ay"
-      else                          # everything else
-        output << "#{word[1..-1]}#{word[0]}ay"
+
+      if word.match(/[,.!?]/)
+        punctuation = word[-1]
+        no_punct_word = word[0..-2]
+      else
+        punctuation = false
+        no_punct_word = word
       end
+
+      if starts_with_vowel(no_punct_word)
+        translated_word = "#{no_punct_word}ay"
+      elsif first_three_consonants(no_punct_word) || contains_qu(no_punct_word)
+        translated_word = "#{no_punct_word[3..-1]}#{no_punct_word[0..2]}ay"
+      elsif first_two_consonants(no_punct_word) || first_two_qu(no_punct_word)
+        translated_word = "#{no_punct_word[2..-1]}#{no_punct_word[0..1]}ay"
+      else
+        translated_word = "#{no_punct_word[1..-1]}#{no_punct_word[0]}ay"
+      end
+
+      translated_word = "#{translated_word}#{punctuation}" if punctuation
+      output << translated_word
+
     end
 
-    fixed_output = []
+    case_fixed = []
     output.each do |word|
       if word != word.downcase
-        fixed_output << word.capitalize
+        case_fixed << word.capitalize
       else
-        fixed_output << word
+        case_fixed << word
       end
     end
 
-    fixed_output.join(" ")
+    case_fixed.join(" ")
 
+  end
+
+  def starts_with_vowel(word)
+    word[0] =~ /[aeiou]/
+  end
+
+  def first_three_consonants(word)
+    word[0..2] !~ /[aeiou]/
+  end
+
+  def contains_qu(word)
+    word[1..2] == "qu"
+  end
+
+  def first_two_consonants(word)
+    word[0..1] !~ /[aeiou]/
+  end
+
+  def first_two_qu(word)
+    word[0..1] == "qu"
   end
 
 end
